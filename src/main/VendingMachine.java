@@ -162,26 +162,33 @@ public class VendingMachine {
 		try {
 			Product product = new Product(itemName);
 			int itemPrice =	vendingMachine.selectItemGetPrice(product);
-			System.out.println("Selected Item:"+ product.getItemName());
-			System.out.println("Selected Item Price:"+ itemPrice);
+			System.out.println("***********************************************");
+
+			System.out.println("Selected Item:"+ " "  + product.getItemName());
+			System.out.println("Selected Item Price:"+ " " + itemPrice);
+			
+			System.out.println("***********************************************");
+
 		if(itemPrice != 0){
 			List <Note> insertedNotes =new ArrayList<Note>();
 			List <Coin> insertedCoins = new ArrayList<Coin>();
 			
 			
-			insertedNotes.add(Note.FIFTYDOLLARS);
+			insertedNotes.add(Note.TWENTYDOLLARS);
+			insertedNotes.add(Note.TWENTYDOLLARS);
 			insertedCoins.add(Coin.FIFTYCENTS);
 			insertedCoins.add(Coin.TWENTYCENTS);
 		
 
 			Optional<Bucket> bucket = vendingMachine.insertMoney(insertedCoins, insertedNotes);
+			
 			vendingMachine.displayInsertedMoney(insertedCoins,insertedNotes);
+			
 			if(bucket.isPresent()){
 				Bucket itemBucket = bucket.get();
 				if(itemBucket.getProduct() !=null){
 					System.out.println(" Return Item: "+ itemBucket.getProduct().getItemName());
 					System.out.println("\n Item Price: "+ itemBucket.getProduct().getItemPrice());
-					displayInsertedCoinValue(itemBucket.getCoin(),itemBucket.getNotes());
 				}
 			}
 		}
@@ -193,15 +200,5 @@ public class VendingMachine {
 		
 	}
 	
-	public static void displayInsertedCoinValue(List<Coin> coin,List<Note> notes){
-		
-		Optional<Integer> userInsertedCoinVlue = coin.stream().map(e->e.getCoinValue()).collect(Collectors.toList()).stream().reduce(Integer::sum);
-		Optional<Integer> userInsertedNotesVlue = notes.stream().map(e->e.getNotesValue()).collect(Collectors.toList()).stream().reduce(Integer::sum);
-
-				
-		System.out.println("\n Return Notes value: "+userInsertedNotesVlue.get()/100 + "$");
-		System.out.println("\n Return Coin value: "+userInsertedCoinVlue.get());
-
-	}
 
 }

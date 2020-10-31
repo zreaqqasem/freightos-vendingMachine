@@ -24,6 +24,7 @@ public class InventoryUtil {
 				convertToNotes(returnNotesArray, value);
 			}			
 			
+			
 		}else if(changedValue>=Note.TWENTYDOLLARS.getNotesValue()){
 			reminder = changedValue/Note.TWENTYDOLLARS.getNotesValue();
 			if(reminder>0){

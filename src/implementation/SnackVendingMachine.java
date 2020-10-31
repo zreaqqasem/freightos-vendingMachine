@@ -131,11 +131,13 @@ public class SnackVendingMachine implements VendingMachine {
 		int insertedCoinsValue = insertedCoinValue.get().intValue();
 		int insertedNotesValue = insertedNoteValue.get().intValue();
 
-		
+		System.out.println("***********************************************");
+
 		System.out.println("\n Inserted Coin Value: "+insertedCoinsValue+"\n");
 		System.out.println("\n Inserted Notes Value: "+insertedNotesValue/100 + "$"+"\n");
 
-		
+		System.out.println("***********************************************");
+
 	}
 		
 	@Override
@@ -179,16 +181,13 @@ public class SnackVendingMachine implements VendingMachine {
 		int changeValue = this.getChanged(insertedCoins+insertedNotes, (int) this.currentItem.getItemPrice());
 		this.subtractCoinsFromInventory(changeValue);
 		this.currentBalance = this.currentBalance-changeValue;
-		
-		System.out.println(changeValue);
-
-		System.out.println(changeValue % 100);
-
-		
 		this.removedItemFromInventory();
 		
+		
+		System.out.println("\n Return Notes value: "+changeValue/100 + "$");
+		System.out.println("\n Return Coin value: " +changeValue%100);
 		InventoryUtil uitls = new InventoryUtil();
-		return new Bucket(this.currentItem, uitls.convertToCoin(new ArrayList<Coin>(),changeValue % 100),uitls.convertToNotes(new ArrayList<Note>(), changeValue));
+		return new Bucket(this.currentItem, uitls.convertToCoin(new ArrayList<Coin>(),changeValue%100),uitls.convertToNotes(new ArrayList<Note>(), changeValue));
 	}
 	
 
